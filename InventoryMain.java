@@ -1,6 +1,7 @@
 public class InventoryMain implements runnable
 {
     private int inventorySize=0;
+    
     public getInventorySize()
     {
         return inventorySize;
@@ -17,6 +18,7 @@ public class InventoryMain implements runnable
     public void add()
     {
         incrementInventory();
+        System.out.println("Added. Inventory size = "+ getInventorySize());
 
     }
     public void remove()
@@ -29,20 +31,20 @@ public class InventoryMain implements runnable
     {
         int addAmount=Integer.parseInt(args[0]);
         int removeAmount=Integer.parseInt(args[1]);
-        
-        System.out.println("Added. Inventory size = "+ getInventorySize());
+        Thread t= new Thread();
+        //System.out.println("Added. Inventory size = "+ getInventorySize());
         for(int i=0;i<addAmount;i++)
         {
-            Add a =new Add();
-            setInventorySize()=a.addition(getInventorySize());
-            a.start();
-            System.out.println("Added. Inventory size = "+ getInventorySize());
+           // Add a =new Add();
+            //setInventorySize()=a.addition(getInventorySize());
+            //a.start();
+            //System.out.println("Added. Inventory size = "+ getInventorySize());
         }
         for(int i=0;i<removeAmount;i++)
         {
-            Remove r=new Remove();
-            setInventorySize()=r.subtraction(getInventorySize());
-            r.start();
+            //Remove r=new Remove();
+            //setInventorySize()=r.subtraction(getInventorySize());
+           // r.start();
             System.out.println("Removed. Inventory size = "+ getInventorySize());
         }
 
