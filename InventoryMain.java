@@ -1,55 +1,55 @@
-public class InventoryMain implements runnable
+public class InventoryMain extends Thread
 {
-    private int inventorySize=0;
-    
-    public getInventorySize()
-    {
-        return inventorySize;
-    }
+    public static int inventorySize;
 
-    public int incrementInventory()
-    {
-        return inventorySize++;
-    }
-    public int decrementInventory()
-    {
-        return inventorySize--;
-    }
-    public void add()
-    {
-        incrementInventory();
-        System.out.println("Added. Inventory size = "+ getInventorySize());
+    public static int addAmount,removeAmount;
 
-    }
-    public void remove()
-    {
-        decrementInventory();
 
-    }
+
+
 
     public static void main (String[] args)
-    {
-        int addAmount=Integer.parseInt(args[0]);
-        int removeAmount=Integer.parseInt(args[1]);
-        Thread t= new Thread();
-        //System.out.println("Added. Inventory size = "+ getInventorySize());
+    { 
+    
+        addAmount=Integer.parseInt(args[0]);
+        removeAmount =Integer.parseInt(args[1]);
+
+        Inventory inv= new Inventory();
+
+        Remove r= new Remove(inv);
+        Add a = new Add(inv);
+        int am=addAmount+removeAmount;
+
+        Thread[] threads= new Thread[am];
         for(int i=0;i<addAmount;i++)
         {
-           // Add a =new Add();
-            //setInventorySize()=a.addition(getInventorySize());
-            //a.start();
-            //System.out.println("Added. Inventory size = "+ getInventorySize());
+            threads[i]= new Thread(a);
+            
         }
-        for(int i=0;i<removeAmount;i++)
+        for(int i=addAmount;i<am;i++)
         {
-            //Remove r=new Remove();
-            //setInventorySize()=r.subtraction(getInventorySize());
-           // r.start();
-            System.out.println("Removed. Inventory size = "+ getInventorySize());
+            threads[i]= new Thread(r);
+        }
+        
+        for(int i=0;i<am;i++)
+        {
+            threads[i].start();
         }
 
-        System.out.println("Final inventory size = "+ getInventorySize());
+        for(int i=0;i<am;i++)
+        {
+            try{
+                threads[i].join();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("Final inventory size = "+ inv.getCounter());
     }
+
     
 }
 

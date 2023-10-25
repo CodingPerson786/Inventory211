@@ -1,11 +1,16 @@
-public class Remove extends Thread
+public class Remove implements Runnable
 {
-    public Remove()
+    Inventory i;
+    public Remove(Inventory i)
     {
+        this.i=i;
     }
-    public int subtraction(int num)
+    
+    public synchronized void run()
     {
-        num--;
-        return num;
+        i.setCounter(i.getCounter()-1);
+        System.out.println("Removed. Inventory size = "+ i.getCounter());
+        
+
     }
 }

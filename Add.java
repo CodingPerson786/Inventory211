@@ -1,11 +1,16 @@
-public class Add extends Thread
+public class Add implements Runnable
 {
-    public Add()
+    Inventory i;
+    public Add(Inventory i)
     {
+        this.i=i;
     }
-    public int addition(int num)
+    
+    public synchronized void run()
     {
-        num++;
-        return num;
+        i.setCounter(i.getCounter()+1);
+        System.out.println("Added. Inventory size = "+ i.getCounter());
+        
+
     }
 }
